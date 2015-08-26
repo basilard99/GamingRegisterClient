@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="biClientApp">
 <head>
     <meta charset="UTF-8">
     <title></title>
+
+    <script src="./bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular-resource/angular-resource.js"></script>
+    <script src="./bower_components/angular-route/angular-route.js"></script>
+
+    <script src="./app/scripts/app.js"></script>
+    <script src="./app/scripts/controllers/mainControllers.js"></script>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-Welcome my son!
+
+    <div ng-view>
+        hi
+    </div>
 </body>
 </html>

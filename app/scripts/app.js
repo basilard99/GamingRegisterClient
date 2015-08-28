@@ -11,7 +11,7 @@ biclient.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/addPublisher', {
             templateUrl: 'app/views/addPublisher.html',
-            controller: 'mainController'
+            controller: 'addPublisherController'
         })
         .otherwise({
             redirectTo: '/main'

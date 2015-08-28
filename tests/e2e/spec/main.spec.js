@@ -11,5 +11,13 @@ describe('Main Page', function() {
         browser.getLocationAbsUrl().then(function(url) {
             expect(url).toEqual('/main');
         });
+    });
+
+    it('should redirect to addPublisher when Add Publisher is clicked', function() {
+        var button = element(by.id('addPublisherButton'));
+        button.click();
+        browser.getLocationAbsUrl().then(function(url) {
+            expect(url).toEqual('/addPublisher');
+        });
     })
 });

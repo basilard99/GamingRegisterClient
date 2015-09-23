@@ -2,14 +2,17 @@
 
 var mainControllers = angular.module('mainControllers', []);
 
-mainControllers.controller('mainSelectionController', ['$scope', '$location', '$http', function($scope, $location, $http) {
+mainControllers.controller('mainSelectionController', ['$scope',
+                                                       '$location',
+                                                       '$http',
+                                                       function defineController($scope, $location, $http) {
 
-    $scope.listPublishers = function(item, event) {
+    $scope.listPublishers = function listPublishers(item, event) {
         alert('Selected Publishers');
     };
 
-    $scope.addPublisher = function(item, event) {
-        $location.path('/addPublisher')
+    $scope.addPublisher = function addPublisher(item, event) {
+        $location.path('/addPublisher');
     };
 
-}])
+}]);

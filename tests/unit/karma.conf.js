@@ -1,7 +1,6 @@
-// Karma configuration
-// Generated on Sun Aug 16 2015 04:35:34 GMT-0400 (Eastern Daylight Time)
+'use strict';
 
-module.exports = function(config) {
+module.exports = function configureKarma(config) {
   config.set({
       basePath: './../../',
       frameworks: ['jasmine'],

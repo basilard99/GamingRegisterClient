@@ -2,7 +2,7 @@
 
 var biclient = angular.module('biClientApp', ['ngRoute', 'mainControllers']);
 
-biclient.config(['$routeProvider', function ($routeProvider) {
+biclient.config(['$routeProvider', function configureRoutes($routeProvider) {
 
     $routeProvider
         .when('/main', {

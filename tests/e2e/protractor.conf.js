@@ -1,9 +1,10 @@
+'use strict';
+
 exports.config = {
-    //chromeOnly: true,
     chromeDriver: '../../nw_support/chromedriver',
     directConnect: true,
 
-    onPrepare: function() {
+    onPrepare: function setUp() {
 
         // By default, Protractor use data:text/html,<html></html> as resetUrl, but
         // location.replace (see http://git.io/tvdSIQ) from the data: to the file: protocol is not allowed

@@ -2,7 +2,7 @@
 
 var module = angular.module('publisherControllers');
 
-module.controller('addPublisherController', function($scope, $http) {
+module.controller('addPublisherController', function defineController($scope, $http) {
 });
 
 /*

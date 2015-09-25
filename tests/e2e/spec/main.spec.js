@@ -12,6 +12,10 @@ describe('Main Page', function testSuite() {
 		localPath = localPath + parts[i] +'/';
 	}
 
+	beforeEach(function setUp() {
+		browser.driver.get(localPath + 'index.html#/');
+	});
+
     it('should redirect index.html to index.html#/main', function testRedirectToMain() {
 
 		browser.driver.get(localPath + 'index.html#/');
@@ -32,6 +36,14 @@ describe('Main Page', function testSuite() {
         button.click();
         browser.getLocationAbsUrl().then(function compareUrl(url) {
             expect(url).toEqual('/addPublisher');
+        });
+    });
+
+    it('should redirect to publisherList when Show Publishers is clicked', function testShowClicked() {
+        var button = element(by.id('listPublishersButton'));
+        button.click();
+        browser.getLocationAbsUrl().then(function compareUrl(url) {
+            expect(url).toEqual('/publishersList');
         });
     });
 });

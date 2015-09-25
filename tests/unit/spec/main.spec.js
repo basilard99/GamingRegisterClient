@@ -15,7 +15,7 @@ describe('Testing the controller: MainCtrl', function mainCtrlTestSuite() {
         $controller('mainSelectionController', { '$scope': $scope });
     }));
 
-    it('listPublishers should be set', function checkList() {
+    it('listPublishers should be defined', function checkList() {
         expect($scope.listPublishers).toBeDefined();
     });
 

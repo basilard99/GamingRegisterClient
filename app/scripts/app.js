@@ -1,6 +1,6 @@
 'use strict';
 
-var biclient = angular.module('biClientApp', ['ngRoute', 'mainControllers']);
+var biclient = angular.module('biClientApp', ['ngRoute', 'mainControllers', 'publisherControllers']);
 
 biclient.config(['$routeProvider', function configureRoutes($routeProvider) {
 
@@ -11,6 +11,10 @@ biclient.config(['$routeProvider', function configureRoutes($routeProvider) {
         })
         .when('/addPublisher', {
             templateUrl: 'app/views/addPublisher.html',
+            controller: 'addPublisherController'
+        })
+        .when('/publishersList', {
+            templateUrl: 'app/views/publisherList.html',
             controller: 'addPublisherController'
         })
         .otherwise({

@@ -8,8 +8,8 @@ module.exports = function configureKarma(config) {
           'bower_components/angular/angular.js',
           'bower_components/angular-mocks/angular-mocks.js',
           'bower_components/angular-route/angular-route.js',
-          'app/scripts/controllers/mainControllers.js',
-          'tests/unit/spec/main.spec.js'
+          'app/scripts/controllers/*.js',
+          'tests/unit/spec/*.spec.js'
       ],
       reporters: ['progress'],
       port: 9876,

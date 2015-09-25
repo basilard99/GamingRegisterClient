@@ -1,23 +1,20 @@
 'use strict';
 
-var module = angular.module('publisherControllers');
+var publisherControllers = angular.module('publisherControllers', []);
 
-module.controller('addPublisherController', function defineController($scope, $http) {
+publisherControllers.controller('addPublisherController', function defineController($scope, $http) {
+
+    $scope.publishers = [];
+    $scope.status = '';
+
+    $scope.loadPublishers = function loadPublishers() {
+        $http.get('http://localhost:8000/api/publishers').
+            then(function success(response) {
+                $scope.publishers = response.data.publisherList;
+            }, function failure() {
+                // TODO: Add logging?
+                $scope.status = 'Unable to load publishers.';
+            }
+        );
+    };
 });
-
-/*
- $scope.addPublisher = function(item, event) {
- var dataObject = {
- name: $scope.pubName
- };
-
- var responsePromise = $http.post('http://localhost:8000/api/publishers', dataObject, {});
- responsePromise.success(function(dataFromServer, status, headers, config) {
- console.log(dataFromServer.title);
- });
- responsePromise.error(function(data, status, headers, config) {
- alert('Submitting form failed!');
- });
- };
-
-*/

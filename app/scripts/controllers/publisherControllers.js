@@ -2,7 +2,7 @@
 
 var publisherControllers = angular.module('publisherControllers', []);
 
-publisherControllers.controller('addPublisherController', function defineController($scope, $http) {
+publisherControllers.controller('publisherListController', function defineController($scope, $http) {
 
     $scope.publishers = [];
     $scope.status = '';

@@ -31,14 +31,6 @@ describe('Main Page', function testSuite() {
         });
     });
 
-    it('should redirect to addPublisher when Add Publisher is clicked', function testAddClicked() {
-        var button = element(by.id('addPublisherButton'));
-        button.click();
-        browser.getLocationAbsUrl().then(function compareUrl(url) {
-            expect(url).toEqual('/addPublisher');
-        });
-    });
-
     it('should redirect to publisherList when Show Publishers is clicked', function testShowClicked() {
         var button = element(by.id('listPublishersButton'));
         button.click();

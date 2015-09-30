@@ -19,13 +19,9 @@ describe('Testing the controller: MainCtrl', function mainCtrlTestSuite() {
         expect($scope.listPublishers).toBeDefined();
     });
 
-    it('addPublisher should be set', function checkAddPublisher() {
-        expect($scope.addPublisher).toBeDefined();
-    });
-
-    it('location should be set to addPublisher when invoked', function checkLocation() {
-        $scope.addPublisher();
-        expect($location.path()).toBe('/addPublisher');
+    it('location should be set to listPublisher when invoked', function checkLocation() {
+        $scope.listPublishers();
+        expect($location.path()).toBe('/listPublishers');
     });
 
 });

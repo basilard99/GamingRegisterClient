@@ -17,7 +17,7 @@ describe('Testing the controller: Publisher', function publisherControllersTestS
         $httpBackend = _$httpBackend_;
         $http = _$http_;
 
-        $controller('addPublisherController', { '$scope': $scope, '$http': $http });
+        $controller('publisherListController', { '$scope': $scope, '$http': $http });
     }));
 
     it('publisher list should be defined on scope', function checkPublishers() {

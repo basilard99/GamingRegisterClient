@@ -1,3 +1,6 @@
-<div class="container" ng-init="loadPublishers()">
+<div class="container" ng-init="$scope.loadPublishers()">
     <h1>Publishers</h1>
+    <ul ng-repeat="publisher in $scope.publishers">
+        <li>publisher.name</li>
+    </ul>
 </div>

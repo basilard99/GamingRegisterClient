@@ -1,3 +1,6 @@
+/****************
+ * Gaming Register Client
+ ***************/
 'use strict';
 
 var gulp = require('gulp');

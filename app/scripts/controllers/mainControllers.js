@@ -10,8 +10,4 @@ mainControllers.controller('mainSelectionController', ['$scope',
         $location.path('/publishersList');
     };
 
-    $scope.addPublisher = function addPublisher() {
-        $location.path('/addPublisher');
-    };
-
 }]);

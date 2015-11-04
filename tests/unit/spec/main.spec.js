@@ -21,7 +21,7 @@ describe('Testing the controller: MainCtrl', function mainCtrlTestSuite() {
 
     it('location should be set to listPublisher when invoked', function checkLocation() {
         $scope.listPublishers();
-        expect($location.path()).toBe('/listPublishers');
+        expect($location.path()).toBe('/publishersList');
     });
 
 });

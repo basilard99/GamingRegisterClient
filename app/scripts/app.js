@@ -6,12 +6,10 @@ biclient.config(['$routeProvider', function configureRoutes($routeProvider) {
 
     $routeProvider
         .when('/main', {
-            templateUrl: 'app/views/main.html',
-            controller: 'mainSelectionController'
+            templateUrl: 'app/views/main.html'
         })
         .when('/publishersList', {
-            templateUrl: 'app/views/publisherList.html',
-            controller: 'publisherListController'
+            templateUrl: 'app/views/publisherList.html'
         })
         .otherwise({
             redirectTo: '/main'

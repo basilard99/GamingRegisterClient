@@ -2,19 +2,25 @@
 
 var publisherControllers = angular.module('publisherControllers', []);
 
-publisherControllers.controller('publisherListController', function defineController($scope, $http) {
+publisherControllers.controller('publisherListController', function defineController($http) {
 
-    $scope.publishers = [];
-    $scope.status = '';
+    var vm = this;
 
-    $scope.loadPublishers = function loadPublishers() {
-        $http.get('http://localhost:8000/api/publishers').
-            then(function success(response) {
-                $scope.publishers = response.data.publisherList;
-            }, function failure() {
-                // TODO: Add logging?
-                $scope.status = 'Unable to load publishers.';
-            }
-        );
+    vm.publisherList = [];
+    vm.status = '';
+
+    vm.successfulCallback = function onSuccess(response) {
+        vm.publisherList = response.data.publisherList;
     };
+
+    vm.failureCallback = function onFailure() {
+        // TODO: Add logging?
+        vm.status = 'Unable to load publishers';
+    };
+
+    vm.loadPublisherList = function loadPublishersFromApi() {
+        $http.get('http://localhost:8000/api/publishers')
+             .then(vm.successfulCallback, vm.failureCallback);
+    };
+
 });

@@ -2,11 +2,12 @@
 
 var mainControllers = angular.module('mainControllers', []);
 
-mainControllers.controller('mainSelectionController', ['$scope',
-                                                       '$location',
-                                                       function defineController($scope, $location) {
+mainControllers.controller('mainSelectionController', ['$location',
+                                                       function defineController($location) {
 
-    $scope.listPublishers = function listPublishers() {
+    var vm = this;
+
+    vm.listPublishers = function listPublishers() {
         $location.path('/publishersList');
     };
 

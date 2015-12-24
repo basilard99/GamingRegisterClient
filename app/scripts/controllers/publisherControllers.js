@@ -6,11 +6,12 @@ publisherControllers.controller('publisherListController', function defineContro
 
     var vm = this;
 
-    vm.publisherList = [];
+    vm.publishers = [];
     vm.status = '';
 
     vm.successfulCallback = function onSuccess(response) {
-        vm.publisherList = response.data.publisherList;
+        vm.publishers = response.data.list;
+        vm.status = 'Success';
     };
 
     vm.failureCallback = function onFailure() {
@@ -19,6 +20,7 @@ publisherControllers.controller('publisherListController', function defineContro
     };
 
     vm.loadPublisherList = function loadPublishersFromApi() {
+        vm.status = 'Loading...';
         $http.get('http://localhost:8000/api/publishers')
              .then(vm.successfulCallback, vm.failureCallback);
     };

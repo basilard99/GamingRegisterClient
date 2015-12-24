@@ -1,15 +1,18 @@
 'use strict';
 
-describe('Testing the Publisher controllers:', function publisherControllersTestSuite() {
+describe('The publisher controllers will behave as follows -', function publisherControllersTestSuite() {
 
     var publisherController;
     var $controller;
     var $httpBackend;
     var $http;
-    var testData = { 'publisherList':
-                    ['Fantasy Flight Games',
-                     'Wizards of the Coast',
-                     'Pinnacle Entertainment Group'] };
+
+    var testData = { 'list': [
+                        'Fantasy Flight Games',
+                        'Wizards of the Coast',
+                        'Pinnacle Entertainment Group'
+                    ]
+    };
 
     beforeEach(angular.mock.module('publisherControllers'));
 
@@ -21,40 +24,44 @@ describe('Testing the Publisher controllers:', function publisherControllersTest
         publisherController = $controller('publisherListController', { '$http': $http });
     }));
 
-    it('should add the publishers to the controller on successful API call', function checkList() {
+    describe('When the publishers API call is successful -', function successfulPublisherAPICall() {
 
-        $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(testData);
-        publisherController.loadPublisherList();
-        $httpBackend.flush();
+        it('then the publishers are added to the controller', function checkList() {
+            $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(testData);
+            publisherController.loadPublisherList();
+            $httpBackend.flush();
 
-        expect(publisherController.publisherList.length).toBe(3);
+            expect(publisherController.publishers.length).toBe(3);
+        });
+
+        it('then the status should be \'Success \'', function checkStatusSuccess() {
+            $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(testData);
+            publisherController.loadPublisherList();
+            $httpBackend.flush();
+
+            expect(publisherController.status).toBe('Success');
+        });
+
     });
 
-    it('status should be empty on successful API call', function checkStatusSuccess() {
+    describe('When the publishers API call is unsuccessful -', function failedPublisherAPICall() {
 
-        $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(testData);
-        publisherController.loadPublisherList();
-        $httpBackend.flush();
+        it('then the publisher list will be empty ', function checkList() {
+            $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(404, '');
+            publisherController.loadPublisherList();
+            $httpBackend.flush();
 
-        expect(publisherController.status).toBe('');
-    });
+            expect(publisherController.publishers.length).toBe(0);
+        });
 
-    it('the publisher list should be empty on a failed API call', function checkList() {
+        it('then the status will be \'Unable to load publishers\'', function checkList() {
+            $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(404, '');
+            publisherController.loadPublisherList();
+            $httpBackend.flush();
 
-        $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(404, '');
-        publisherController.loadPublisherList();
-        $httpBackend.flush();
+            expect(publisherController.status).toBe('Unable to load publishers');
+        });
 
-        expect(publisherController.publisherList.length).toBe(0);
-    });
-
-    it('the status should contain an error message on a failed API call', function checkList() {
-
-        $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(404, '');
-        publisherController.loadPublisherList();
-        $httpBackend.flush();
-
-        expect(publisherController.status.length).toBeGreaterThan(0);
     });
 
     afterEach(function verifyFinal() {

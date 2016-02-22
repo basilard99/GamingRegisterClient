@@ -27,7 +27,7 @@ describe('The publisher controllers will behave as follows -', function publishe
     describe('When the publishers API call is successful -', function successfulPublisherAPICall() {
 
         it('then the publishers are added to the controller', function checkList() {
-            $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(testData);
+            $httpBackend.expect('GET', 'http://localhost:8000/api/publisherList').respond(testData);
             publisherController.loadPublisherList();
             $httpBackend.flush();
 
@@ -35,7 +35,7 @@ describe('The publisher controllers will behave as follows -', function publishe
         });
 
         it('then the status should be \'Success \'', function checkStatusSuccess() {
-            $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(testData);
+            $httpBackend.expect('GET', 'http://localhost:8000/api/publisherList').respond(testData);
             publisherController.loadPublisherList();
             $httpBackend.flush();
 
@@ -47,7 +47,7 @@ describe('The publisher controllers will behave as follows -', function publishe
     describe('When the publishers API call is unsuccessful -', function failedPublisherAPICall() {
 
         it('then the publisher list will be empty ', function checkList() {
-            $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(404, '');
+            $httpBackend.expect('GET', 'http://localhost:8000/api/publisherList').respond(404, '');
             publisherController.loadPublisherList();
             $httpBackend.flush();
 
@@ -55,7 +55,7 @@ describe('The publisher controllers will behave as follows -', function publishe
         });
 
         it('then the status will be \'Unable to load publishers\'', function checkList() {
-            $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(404, '');
+            $httpBackend.expect('GET', 'http://localhost:8000/api/publisherList').respond(404, '');
             publisherController.loadPublisherList();
             $httpBackend.flush();
 

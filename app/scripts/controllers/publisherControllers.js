@@ -21,7 +21,7 @@ publisherControllers.controller('publisherListController', function defineContro
 
     vm.loadPublisherList = function loadPublishersFromApi() {
         vm.status = 'Loading...';
-        $http.get('http://localhost:8000/api/publishers')
+        $http.get('http://localhost:8000/api/publisherList')
              .then(vm.successfulCallback, vm.failureCallback);
     };
 

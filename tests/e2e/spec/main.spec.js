@@ -45,5 +45,13 @@ describe('The main page will behave as follows -', function testSuite() {
 			});
 		});
 
+		it('when Add Publisher is clicked then the user is sent to /addPublisher', function testAddClicked() {
+			var button = element(by.id('addPublisherButton'));
+			button.click();
+			browser.getLocationAbsUrl().then(function compareUrl(url) {
+				expect(url).toEqual('/addPublisher');
+			});
+		});
+
 	});
 });

@@ -26,3 +26,17 @@ publisherControllers.controller('publisherListController', function defineContro
     };
 
 });
+
+publisherControllers.controller('addPublisherController', function defineController($http) {
+
+    var vm = this;
+    var defaultPublisher = {
+        name: "Publisher Name",
+        webSite: "www.somewhere.com",
+        code: "XXX",
+        isActive: true
+    };
+
+    vm.publisher = defaultPublisher;
+    
+});

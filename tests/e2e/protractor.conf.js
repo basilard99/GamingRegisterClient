@@ -3,7 +3,6 @@
 exports.config = {
     chromeDriver: '../../nw_support/chromedriver',
     directConnect: true,
-
     onPrepare: function setUp() {
 
         // By default, Protractor use data:text/html,<html></html> as resetUrl, but

@@ -12,7 +12,7 @@ biclient.config(['$routeProvider', function configureRoutes($routeProvider) {
             templateUrl: 'app/views/publisherList.html'
         })
         .when('/addPublisher', {
-            templateUrl: 'app/views/addPublishe.html'
+            templateUrl: 'app/views/addPublisher.html'
         })
         .otherwise({
             redirectTo: '/main'

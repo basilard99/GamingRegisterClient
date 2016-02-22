@@ -1,3 +1,40 @@
-<div class="container">
-    <h1>Add Publisher</h1>
+<div class="container" ng-controller="addPublisherController as addPublisher">
+    <h3>Add Publisher</h3>
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label for="publisherName" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="publisherName" placeholder="{{addPublisher.publisher.name}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="webSite" class="col-sm-2 control-label">Web Site</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="webSite" placeholder="{{addPublisher.publisher.webSite}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="code" class="col-sm-2 control-label">Code</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="code" placeholder="{{addPublisher.publisher.code}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="isActive" class="col-sm-2 control-label">Is Active?</label>
+        <div class="col-sm-4">
+          <input type="checkbox" class="form-control" id="isActive" checked="{{addPublisher.publisher.isActive}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="description" class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="description" placeholder="Description">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-success">Add</button>
+        </div>
+      </div>
+    </form>
 </div>

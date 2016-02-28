@@ -1,22 +1,22 @@
-<div class="container" ng-controller="addPublisherController as addPublisher">
+<div class="container" ng-controller="addPublisherController as ctrl">
     <h3>Add Publisher</h3>
-    <form class="form-horizontal" role="form">
-      <div class="form-group">
+    <form class="form-horizontal" name="ctrl.addPublisherForm" role="form">
+      <div class="form-group" ng-class="{'has-error': ctrl.addPublisherForm.publisherName.$dirty && ctrl.addPublisherForm.publisherName.$invalid}">
         <label for="publisherName" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-4">
-          <input class="form-control" id="publisherName" placeholder="{{addPublisher.publisher.name}}">
+          <input class="form-control" id="publisherName" name="publisherName" placeholder="Enter publisher name..." ng-model="ctrl.publisher.name" ng-model-options="{updateOn: 'blur'}" ng-required="true" ng-minlength="2" ng-maxlength="80">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" ng-class="{'has-error': ctrl.addPublisherForm.publisherUrl.$dirty && ctrl.addPublisherForm.publisherUrl.$invalid}">
         <label for="webSite" class="col-sm-2 control-label">Web Site</label>
         <div class="col-sm-4">
-          <input class="form-control" id="webSite" placeholder="{{addPublisher.publisher.webSite}}">
+          <input class="form-control" id="publisherUrl" name="publisherUrl" placeholder="Enter publisher URL..." type="url" ng-model="ctrl.publisher.webSite" ng-model-options="{updateOn: 'blur'}" ng-required="true">
         </div>
       </div>
-      <div class="form-group">
-        <label for="code" class="col-sm-2 control-label">Code</label>
+      <div class="form-group" ng-class="{'has-error': ctrl.addPublisherForm.publisherCode.$dirty && ctrl.addPublisherForm.publisherCode.$invalid}">
+        <label for="publisherCode" class="col-sm-2 control-label">Code</label>
         <div class="col-sm-4">
-          <input class="form-control" id="code" placeholder="{{addPublisher.publisher.code}}">
+          <input class="form-control" id="publisherCode" name="publisherCode" placeholder="Enter publisher code..." ng-model="ctrl.publisher.code" ng-model-options="{updateOn: 'blur'}" ng-required="true" ng-minlength="2" ng-maxlength="6">
         </div>
       </div>
       <div class="form-group">
@@ -25,15 +25,15 @@
           <input type="checkbox" class="form-control" id="isActive" checked="{{addPublisher.publisher.isActive}}">
         </div>
       </div>
-      <div class="form-group">
-        <label for="description" class="col-sm-2 control-label">Description</label>
+      <div class="form-group" ng-class="{'has-error': ctrl.addPublisherForm.publisherDescription.$dirty && ctrl.addPublisherForm.publisherDescription.$invalid}">
+        <label for="publisherDescription" class="col-sm-2 control-label">Description</label>
         <div class="col-sm-4">
-          <input class="form-control" id="description" placeholder="Description">
+          <input class="form-control" id="publisherDescription" name="publisherDescription" placeholder="Enter publisher description..." ng-model="ctrl.publisher.description" ng-model-options="{updateOn: 'blur'}" ng-maxlength="500">
         </div>
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-success">Add</button>
+          <button type="submit" class="btn btn-success" ng-click="ctrl.addPublisher()">Add</button>
         </div>
       </div>
     </form>

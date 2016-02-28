@@ -31,12 +31,15 @@ publisherControllers.controller('addPublisherController', function defineControl
 
     var vm = this;
     var defaultPublisher = {
-        name: "Publisher Name",
-        webSite: "www.somewhere.com",
+        name: "",
+        webSite: "",
         code: "XXX",
         isActive: true
     };
 
     vm.publisher = defaultPublisher;
-    
+    vm.addPublisher = function addPublisherToApi() {
+        console.log(vm.publisher);
+    }
+
 });

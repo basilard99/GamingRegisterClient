@@ -27,19 +27,32 @@ publisherControllers.controller('publisherListController', function defineContro
 
 });
 
-publisherControllers.controller('addPublisherController', function defineController($http) {
+publisherControllers.controller('addPublisherController', function defineController($http, locationService) {
 
     var vm = this;
     var defaultPublisher = {
-        name: "",
-        webSite: "",
-        code: "XXX",
-        isActive: true
+        name: '',
+        webSite: '',
+        code: '',
+        isActive: true,
+        description: ''
     };
 
-    vm.publisher = defaultPublisher;
-    vm.addPublisher = function addPublisherToApi() {
-        console.log(vm.publisher);
+    vm.addSuccessful = function onSuccess() {
+        vm.addPublisherStatus = 'Publisher added successfully';
     }
+
+    vm.addFailed = function onFailure(response) {
+        vm.addPublisherStatus = 'Failed to add publisher ' + response.status;
+    }
+
+    vm.addPublisherStatus = '';
+    vm.publisher = defaultPublisher;
+
+    vm.addPublisher = function addPublisherToApi() {
+        vm.addPublisherStatus = 'Processing...';
+        $http.put(locationService.getBaseLocation() + '/api/publisherList/' + vm.publisher.code, vm.publisher)
+             .then(vm.addSuccessful, vm.addFailed);
+    };
 
 });

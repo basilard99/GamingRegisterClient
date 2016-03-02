@@ -1,6 +1,6 @@
 'use strict';
 
-var biclient = angular.module('biClientApp', ['ngRoute', 'mainControllers', 'publisherControllers']);
+var biclient = angular.module('biClientApp', ['ngRoute', 'mainControllers', 'publisherControllers', 'utilityServices']);
 
 biclient.config(['$routeProvider', function configureRoutes($routeProvider) {
 

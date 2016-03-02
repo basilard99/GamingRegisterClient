@@ -4,7 +4,8 @@
 'use strict';
 
 var gulp = require('gulp');
-var protractor = require('gulp-protractor');
+var nodemon = require('gulp-nodemon');
+var protractor = require('gulp-protractor').protractor;
 var karmaServer = require('karma').Server;
 var eslint = require('gulp-eslint');
 var exec = require('child_process').exec;
@@ -24,15 +25,18 @@ gulp.task('lint', function lintTask() {
 		.pipe(eslint.format());
 });
 
-gulp.task('e2e', function e2eTask() {
-    return gulp.src(['./tests/e2e/**/*.js'])
-        .pipe(protractor.protractor({
+gulp.task('e2e', function e2eTask(done) {
+
+	var e2eServer = require('./tests/e2e/mock-api/server.js');
+
+    gulp.src(['./tests/e2e/spec/**/*.js'])
+        .pipe(protractor({
             configFile: './tests/e2e/protractor.conf.js'
-        }))
-        .on('error', function protractorFailed(err) {
-            throw err;
-        });
-});
+        }));
+
+	done();
+
+})
 
 gulp.task('unit', function unitTask(done) {
     new karmaServer({

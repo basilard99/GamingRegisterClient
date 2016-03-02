@@ -9,6 +9,7 @@ module.exports = function configureKarma(config) {
           'bower_components/angular-mocks/angular-mocks.js',
           'bower_components/angular-route/angular-route.js',
           'app/scripts/controllers/*.js',
+          'app/scripts/services/*.js',
           'tests/unit/spec/*.spec.js'
       ],
       reporters: ['progress'],

@@ -17,30 +17,21 @@ describe('The \'Add Publisher\' page will behave as follows - ', function addPub
         browser.driver.get(localPath + '/index.html#/addPublisher');
     });
 
-    describe('The initial form values will be specified defaults -', function testInitialValues() {
+    describe('When the Add button is clicked -', function addButtonTests() {
 
-        it('The initial name is correct', function testInitialName() {
-            var input = element(by.id('publisherName'));
-            var value = input.getAttribute('placeHolder');
-            expect(value).toEqual('Publisher Name');
-        });
+        it('will send the publisher to the service', function sendPublisherDataTest() {
 
-        it('The initial web site is correct', function testInitialName() {
-            var input = element(by.id('webSite'));
-            var value = input.getAttribute('placeHolder');
-            expect(value).toEqual('www.somewhere.com');
-        });
+            element(by.id('publisherName')).sendKeys('Fantasy Flight Games');
+            element(by.id('publisherUrl')).sendKeys('http://www.ffg.com');
+            element(by.id('publisherCode')).sendKeys('FFG');
+            element(by.id('publisherDescription')).sendKeys('Owned by Asmodee');
 
-        it('The initial code is correct', function testInitialName() {
-            var input = element(by.id('code'));
-            var value = input.getAttribute('placeHolder');
-            expect(value).toEqual('XXX');
-        });
+            var button = element(by.id('addPublisherButton'));
+            button.click();
 
-        it('The initial active flag is correct', function testInitialName() {
-            var input = element(by.id('isActive'));
-            var value = input.getAttribute('checked');
-            expect(value).toEqual('true');
+            var status = element(by.id('addPublisherStatus')).getText();
+            expect(status).toBe('Publisher added successfully');
+
         });
     });
 });

@@ -3,6 +3,7 @@
 describe('The publisher controllers will behave as follows -', function publisherControllersTestSuite() {
 
     var publisherController;
+    var addPublisherController;
     var $controller;
     var $httpBackend;
     var $http;
@@ -14,6 +15,7 @@ describe('The publisher controllers will behave as follows -', function publishe
                     ]
     };
 
+    beforeEach(angular.mock.module('utilityServices'));
     beforeEach(angular.mock.module('publisherControllers'));
 
     beforeEach(angular.mock.inject(function setUpMocks(_$controller_, _$httpBackend_, _$http_) {
@@ -22,6 +24,7 @@ describe('The publisher controllers will behave as follows -', function publishe
         $http = _$http_;
 
         publisherController = $controller('publisherListController', { '$http': $http });
+        addPublisherController = $controller('addPublisherController', { '$http': $http});
     }));
 
     describe('When the publishers API call is successful -', function successfulPublisherAPICall() {
@@ -63,6 +66,26 @@ describe('The publisher controllers will behave as follows -', function publishe
         });
 
     });
+
+    describe('When addPublishers is executed - ', function addPublishersCalled() {
+
+        it('then the publisher will be sent to the API', function checkPublisherSentToApi() {
+            var testPublisher = {
+                name: 'Fantasy Flight Games',
+                webSite: 'http://www.ffg.com',
+                code: 'FFG',
+                isActive: true,
+                description: 'Owned by Asmodee'
+            };
+
+            $httpBackend.expectPUT('http://localhost:8100/api/publisherList/FFG', testPublisher).respond(201);
+
+            addPublisherController.publisher = testPublisher;
+            addPublisherController.addPublisher();
+
+            $httpBackend.flush();
+        });
+    })
 
     afterEach(function verifyFinal() {
         $httpBackend.verifyNoOutstandingExpectation();

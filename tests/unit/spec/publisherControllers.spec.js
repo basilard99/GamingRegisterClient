@@ -1,6 +1,6 @@
 'use strict';
 
-describe('The publisher controllers will behave as follows -', function publisherControllersTestSuite() {
+describe('The publisher controllers behave as follows -', function publisherControllersTestSuite() {
 
     var publisherController;
     var addPublisherController;
@@ -15,6 +15,8 @@ describe('The publisher controllers will behave as follows -', function publishe
                     ]
     };
 
+    var baseLocation = 'http://localhost:8100/api';
+
     beforeEach(angular.mock.module('utilityServices'));
     beforeEach(angular.mock.module('publisherControllers'));
 
@@ -24,68 +26,76 @@ describe('The publisher controllers will behave as follows -', function publishe
         $http = _$http_;
 
         publisherController = $controller('publisherListController', { '$http': $http });
-        addPublisherController = $controller('addPublisherController', { '$http': $http});
+        addPublisherController = $controller('addPublisherController', { '$http': $http });
     }));
 
-    describe('When the publishers API call is successful -', function successfulPublisherAPICall() {
+    describe('Given the publisherListController -', function publisherListControllerTests() {
 
-        it('then the publishers are added to the controller', function checkList() {
-            $httpBackend.expect('GET', 'http://localhost:8000/api/publisherList').respond(testData);
-            publisherController.loadPublisherList();
-            $httpBackend.flush();
+        describe('When the publisher list is loaded successfully -', function successfulPublisherAPICall() {
 
-            expect(publisherController.publishers.length).toBe(3);
+            it('then the publishers are added to the controller', function checkList() {
+                $httpBackend.expect('GET', baseLocation + '/publisherList').respond(testData);
+                publisherController.loadPublisherList();
+                $httpBackend.flush();
+
+                expect(publisherController.publishers.length).toBe(3);
+            });
+
+            it('then the status should be \'Success \'', function checkStatusSuccess() {
+                $httpBackend.expect('GET', baseLocation + '/publisherList').respond(testData);
+                publisherController.loadPublisherList();
+                $httpBackend.flush();
+
+                expect(publisherController.status).toBe('Success');
+            });
+
         });
 
-        it('then the status should be \'Success \'', function checkStatusSuccess() {
-            $httpBackend.expect('GET', 'http://localhost:8000/api/publisherList').respond(testData);
-            publisherController.loadPublisherList();
-            $httpBackend.flush();
+        describe('When the publisher list fails to load -', function failedPublisherAPICall() {
 
-            expect(publisherController.status).toBe('Success');
+            it('then the publisher list will be empty ', function checkList() {
+                $httpBackend.expect('GET', baseLocation + '/publisherList').respond(404, '');
+                publisherController.loadPublisherList();
+                $httpBackend.flush();
+
+                expect(publisherController.publishers.length).toBe(0);
+            });
+
+            it('then the status will be \'Unable to load publishers\'', function checkList() {
+                $httpBackend.expect('GET', baseLocation + '/publisherList').respond(404, '');
+                publisherController.loadPublisherList();
+                $httpBackend.flush();
+
+                expect(publisherController.status).toBe('Unable to load publishers');
+            });
+
         });
 
     });
 
-    describe('When the publishers API call is unsuccessful -', function failedPublisherAPICall() {
+    describe('Given the publisherController - ', function publisherControllerTests() {
 
-        it('then the publisher list will be empty ', function checkList() {
-            $httpBackend.expect('GET', 'http://localhost:8000/api/publisherList').respond(404, '');
-            publisherController.loadPublisherList();
-            $httpBackend.flush();
+        describe('When a publisher is added - ', function addPublishersCalled() {
 
-            expect(publisherController.publishers.length).toBe(0);
-        });
+            it('then the publisher will be sent to the API', function checkPublisherSentToApi() {
+                var testPublisher = {
+                    name: 'Fantasy Flight Games',
+                    webSite: 'http://www.ffg.com',
+                    code: 'FFG',
+                    isActive: true,
+                    description: 'Owned by Asmodee'
+                };
 
-        it('then the status will be \'Unable to load publishers\'', function checkList() {
-            $httpBackend.expect('GET', 'http://localhost:8000/api/publisherList').respond(404, '');
-            publisherController.loadPublisherList();
-            $httpBackend.flush();
+                $httpBackend.expectPUT(baseLocation + '/publisherList/FFG', testPublisher).respond(201);
 
-            expect(publisherController.status).toBe('Unable to load publishers');
+                addPublisherController.publisher = testPublisher;
+                addPublisherController.addPublisher();
+
+                $httpBackend.flush();
+            });
         });
 
     });
-
-    describe('When addPublishers is executed - ', function addPublishersCalled() {
-
-        it('then the publisher will be sent to the API', function checkPublisherSentToApi() {
-            var testPublisher = {
-                name: 'Fantasy Flight Games',
-                webSite: 'http://www.ffg.com',
-                code: 'FFG',
-                isActive: true,
-                description: 'Owned by Asmodee'
-            };
-
-            $httpBackend.expectPUT('http://localhost:8100/api/publisherList/FFG', testPublisher).respond(201);
-
-            addPublisherController.publisher = testPublisher;
-            addPublisherController.addPublisher();
-
-            $httpBackend.flush();
-        });
-    })
 
     afterEach(function verifyFinal() {
         $httpBackend.verifyNoOutstandingExpectation();

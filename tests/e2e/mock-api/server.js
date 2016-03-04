@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 
 app.put('/api/publisherlist/ffg', function test(req, res) {
@@ -36,7 +36,7 @@ app.put('/api/publisherlist/ffg', function test(req, res) {
     res.send();
 });
 
-app.server = app.listen(8100, function() {
+app.server = app.listen(8100, function listenOn() {
     console.log('Gulp is running the mock server on port: ' + 8100);
 });
 

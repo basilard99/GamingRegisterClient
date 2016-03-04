@@ -1,5 +1,7 @@
 'use strict';
 
+// NEEDS REVIEWED
+
 describe('The main controllers will behave as follows -', function mainControllersTestSuite() {
 
     var mainController;

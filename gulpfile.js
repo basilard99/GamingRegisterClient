@@ -4,7 +4,6 @@
 'use strict';
 
 var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
 var protractor = require('gulp-protractor').protractor;
 var karmaServer = require('karma').Server;
 var eslint = require('gulp-eslint');
@@ -25,21 +24,18 @@ gulp.task('lint', function lintTask() {
 		.pipe(eslint.format());
 });
 
-gulp.task('e2e', function e2eTask(done) {
-
-	var e2eServer = require('./tests/e2e/mock-api/server.js');
+gulp.task('e2e', function e2eTask() {
+	require('./tests/e2e/mock-api/server.js');
 
     gulp.src(['./tests/e2e/spec/**/*.js'])
         .pipe(protractor({
             configFile: './tests/e2e/protractor.conf.js'
         }));
 
-	done();
-
-})
+});
 
 gulp.task('unit', function unitTask(done) {
-    new karmaServer({
+    new karmaServer({ //eslint-disable-line new-cap
         configFile: __dirname + '/tests/unit/karma.conf.js',
         singleRun: true
     }, done).start();

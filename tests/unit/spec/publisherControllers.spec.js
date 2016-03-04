@@ -1,63 +1,100 @@
 'use strict';
 
-describe('Testing the controller: Publisher', function publisherControllersTestSuite() {
+describe('The publisher controllers behave as follows -', function publisherControllersTestSuite() {
 
-    var $rootScope, $scope, $controller, $httpBackend, $http;
-    var testData = { 'publisherList':
-                    ['Fantasy Flight Games',
-                     'Wizards of the Coast',
-                     'Pinnacle Entertainment Group'] };
+    var publisherController;
+    var addPublisherController;
+    var $controller;
+    var $httpBackend;
+    var $http;
 
+    var testData = { 'list': [
+                        'Fantasy Flight Games',
+                        'Wizards of the Coast',
+                        'Pinnacle Entertainment Group'
+                    ]
+    };
+
+    var baseLocation = 'http://localhost:8100/api';
+
+    beforeEach(angular.mock.module('utilityServices'));
     beforeEach(angular.mock.module('publisherControllers'));
 
-    beforeEach(angular.mock.inject(function setUpMocks(_$rootScope_, _$controller_, _$httpBackend_, _$http_) {
-        $rootScope = _$rootScope_;
-        $scope = $rootScope.$new();
+    beforeEach(angular.mock.inject(function setUpMocks(_$controller_, _$httpBackend_, _$http_) {
         $controller = _$controller_;
         $httpBackend = _$httpBackend_;
         $http = _$http_;
 
-        $controller('publisherListController', { '$scope': $scope, '$http': $http });
+        publisherController = $controller('publisherListController', { '$http': $http });
+        addPublisherController = $controller('addPublisherController', { '$http': $http });
     }));
 
-    it('publisher list should be defined on scope', function checkPublishers() {
-        expect($scope.publishers).toBeDefined();
+    describe('Given the publisherListController -', function publisherListControllerTests() {
+
+        describe('When the publisher list is loaded successfully -', function successfulPublisherAPICall() {
+
+            it('then the publishers are added to the controller', function checkList() {
+                $httpBackend.expect('GET', baseLocation + '/publisherList').respond(testData);
+                publisherController.loadPublisherList();
+                $httpBackend.flush();
+
+                expect(publisherController.publishers.length).toBe(3);
+            });
+
+            it('then the status should be \'Success \'', function checkStatusSuccess() {
+                $httpBackend.expect('GET', baseLocation + '/publisherList').respond(testData);
+                publisherController.loadPublisherList();
+                $httpBackend.flush();
+
+                expect(publisherController.status).toBe('Success');
+            });
+
+        });
+
+        describe('When the publisher list fails to load -', function failedPublisherAPICall() {
+
+            it('then the publisher list will be empty ', function checkList() {
+                $httpBackend.expect('GET', baseLocation + '/publisherList').respond(404, '');
+                publisherController.loadPublisherList();
+                $httpBackend.flush();
+
+                expect(publisherController.publishers.length).toBe(0);
+            });
+
+            it('then the status will be \'Unable to load publishers\'', function checkList() {
+                $httpBackend.expect('GET', baseLocation + '/publisherList').respond(404, '');
+                publisherController.loadPublisherList();
+                $httpBackend.flush();
+
+                expect(publisherController.status).toBe('Unable to load publishers');
+            });
+
+        });
+
     });
 
-    it('should add the publishers to the scope on successful call', function checkList() {
+    describe('Given the publisherController - ', function publisherControllerTests() {
 
-        $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(testData);
-        $scope.loadPublishers();
-        $httpBackend.flush();
+        describe('When a publisher is added - ', function addPublishersCalled() {
 
-        expect($scope.publishers.length).toBe(3);
-    });
+            it('then the publisher will be sent to the API', function checkPublisherSentToApi() {
+                var testPublisher = {
+                    name: 'Fantasy Flight Games',
+                    webSite: 'http://www.ffg.com',
+                    code: 'FFG',
+                    isActive: true,
+                    description: 'Owned by Asmodee'
+                };
 
-    it('status should be empty on successful call', function checkStatusSuccess() {
+                $httpBackend.expectPUT(baseLocation + '/publisherList/FFG', testPublisher).respond(201);
 
-        $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(testData);
-        $scope.loadPublishers();
-        $httpBackend.flush();
+                addPublisherController.publisher = testPublisher;
+                addPublisherController.addPublisher();
 
-        expect($scope.status).toBe('');
-    });
+                $httpBackend.flush();
+            });
+        });
 
-    it('the publisher list should be empty on a failed call', function checkList() {
-
-        $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(404, '');
-        $scope.loadPublishers();
-        $httpBackend.flush();
-
-        expect($scope.publishers.length).toBe(0);
-    });
-
-    it('the status should contain an error message on a failed call', function checkList() {
-
-        $httpBackend.expect('GET', 'http://localhost:8000/api/publishers').respond(404, '');
-        $scope.loadPublishers();
-        $httpBackend.flush();
-
-        expect($scope.status.length).toBeGreaterThan(0);
     });
 
     afterEach(function verifyFinal() {

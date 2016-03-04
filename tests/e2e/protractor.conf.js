@@ -3,7 +3,6 @@
 exports.config = {
     chromeDriver: '../../nw_support/chromedriver',
     directConnect: true,
-
     onPrepare: function setUp() {
 
         // By default, Protractor use data:text/html,<html></html> as resetUrl, but
@@ -15,11 +14,14 @@ exports.config = {
         // This isn't required and used to avoid ‘Cannot extract package’ error showed
         // before Protractor have redirected node-webkit to resetUrl.
         browser.driver.get('file://');
-    },
 
+        //var SpecReporter = require('jasmine-spec-reporter');
+        //jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: 'all'}));
+    },
     // Options to be passed to Jasmine-node.
     jasmineNodeOpts: {
         showColors: true,
-        defaultTimeoutInterval: 30000
+        defaultTimeoutInterval: 30000,
+        //print: function() {}
     }
 };

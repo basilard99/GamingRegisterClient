@@ -1,6 +1,7 @@
 'use strict';
 
-describe('Main Page', function testSuite() {
+describe('The main page will behave as follows -', function testSuite() {
+
 	// Replace backslashes with forward slashes. On a Windows machine
 	// this will convert to a url style. If not, then it won't do
 	// anything. (I think)
@@ -16,26 +17,41 @@ describe('Main Page', function testSuite() {
 		browser.driver.get(localPath + 'index.html#/');
 	});
 
-    it('should redirect index.html to index.html#/main', function testRedirectToMain() {
+	describe('URL access will be as follows -', function redirectionTests() {
 
-		browser.driver.get(localPath + 'index.html#/');
-        browser.getLocationAbsUrl().then(function compareUrl(url) {
-			expect(url).toEqual('/main');
-        });
-    });
+		it('navigating to index.html will redirect to /main', function testRedirectToMain() {
+			browser.driver.get(localPath + 'index.html#/');
+			browser.getLocationAbsUrl().then(function compareUrl(url) {
+				expect(url).toEqual('/main');
+			});
+		});
 
-    it('should redirect garbage request to index.html/main', function testGarbageRequest() {
-        browser.driver.get(localPath + 'index.html#/garbage');
-        browser.getLocationAbsUrl().then(function compareUrl(url) {
-            expect(url).toEqual('/main');
-        });
-    });
+		it('a garbage request will be redirected to /main', function testGarbageRequest() {
+			browser.driver.get(localPath + 'index.html#/garbage');
+			browser.getLocationAbsUrl().then(function compareUrl(url) {
+				expect(url).toEqual('/main');
+			});
+		});
 
-    it('should redirect to publisherList when Show Publishers is clicked', function testShowClicked() {
-        var button = element(by.id('listPublishersButton'));
-        button.click();
-        browser.getLocationAbsUrl().then(function compareUrl(url) {
-            expect(url).toEqual('/publishersList');
-        });
-    });
+	});
+
+	describe('User actions are taken -', function userActions() {
+
+		it('when Show Publishers is clicked then the user is sent to /publishersList', function testShowClicked() {
+			var button = element(by.id('listPublishersButton'));
+			button.click();
+			browser.getLocationAbsUrl().then(function compareUrl(url) {
+				expect(url).toEqual('/publishersList');
+			});
+		});
+
+		it('when Add Publisher is clicked then the user is sent to /addPublisher', function testAddClicked() {
+			var button = element(by.id('addPublisherButton'));
+			button.click();
+			browser.getLocationAbsUrl().then(function compareUrl(url) {
+				expect(url).toEqual('/addPublisher');
+			});
+		});
+
+	});
 });

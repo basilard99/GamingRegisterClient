@@ -12,8 +12,11 @@ mainControllers.controller('mainSelectionController', ['$location',
     };
 
     vm.addPublisher = function addPublisher() {
-        console.log('HERE');
         $location.path('/addPublisher');
+    };
+
+    vm.addBook = function addBook() {
+        $location.path('/addBook');
     };
 
 }]);

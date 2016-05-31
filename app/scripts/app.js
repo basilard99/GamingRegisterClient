@@ -1,6 +1,6 @@
 'use strict';
 
-var biclient = angular.module('biClientApp', ['ngRoute', 'mainControllers', 'publisherControllers', 'utilityServices']);
+var biclient = angular.module('biClientApp', ['ngRoute', 'mainControllers', 'publisherControllers', 'bookControllers', 'utilityServices']);
 
 biclient.config(['$routeProvider', function configureRoutes($routeProvider) {
 
@@ -13,6 +13,9 @@ biclient.config(['$routeProvider', function configureRoutes($routeProvider) {
         })
         .when('/addPublisher', {
             templateUrl: 'app/views/addPublisher.html'
+        })
+        .when('/addBook', {
+            templateUrl: 'app/views/addBook.html'
         })
         .otherwise({
             redirectTo: '/main'

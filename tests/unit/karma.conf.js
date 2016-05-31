@@ -12,13 +12,18 @@ module.exports = function configureKarma(config) {
           'app/scripts/services/*.js',
           'tests/unit/spec/*.spec.js'
       ],
+      plugins: [
+          'karma-jasmine',
+          'karma-phantomjs-launcher',
+          'karma-chrome-launcher'
+      ],
       reporters: ['progress'],
       port: 9876,
       colors: true,
       logLevel: config.LOG_INFO,
       autoWatch: true,
-      browsers: ['Chrome'],
+      browsers: ['PhantomJS'],
       captureTimeout: 60000,
-      singleRun: false
+      singleRun: true
   });
 };

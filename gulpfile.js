@@ -15,6 +15,10 @@ gulp.task('dev', function devTask() {
 		gulp.src(['gulpfile.js', './app/**/*.js', './tests/**/*.js'])
 			.pipe(eslint())
 			.pipe(eslint.format());
+		new karmaServer({ //eslint-disable-line new-cap
+			configFile: __dirname + '/tests/unit/karma.conf.js',
+			singleRun: false
+		}).start();
 	});
 });
 

@@ -1,0 +1,69 @@
+<div class="container" ng-controller="addBookController as ctrl">
+    <h3>Add Book</h3>
+    <form class="form-horizontal" name="ctrl.addBookForm" role="form">
+      <div class="form-group" ng-class="{'has-error': ctrl.addBookForm.bookTitle.$dirty && ctrl.addBookForm.bookTitle.$invalid}">
+        <label for="bookTitle" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="bookTitle" name="bookTitle" placeholder="Enter book title..." ng-model="ctrl.book.title" ng-model-options="{updateOn: 'blur'}" ng-required="true" ng-minlength="2" ng-maxlength="80">
+        </div>
+      </div>
+      <div class="form-group" ng-class="{'has-error': ctrl.addBookForm.bookCode.$dirty && ctrl.addBookForm.bookCode.$invalid}">
+        <label for="bookCode" class="col-sm-2 control-label">Code</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="bookCode" name="bookCode" placeholder="Enter book code..." ng-model="ctrl.book.code" ng-model-options="{updateOn: 'blur'}" ng-required="true" ng-minlength="2" ng-maxlength="24">
+        </div>
+      </div>
+      <div class="form-group" ng-class="{'has-error': ctrl.addBookForm.bookDescription.$dirty && ctrl.addBookForm.bookDescription.$invalid}">
+        <label for="bookDescription" class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="bookDescription" name="bookDescription" placeholder="Enter book description..." ng-model="ctrl.publisher.description" ng-model-options="{updateOn: 'blur'}" ng-maxlength="500">
+        </div>
+      </div>
+      <div class="form-group" ng-class="{'has-error': ctrl.addBookForm.bookCost.$dirty && ctrl.addBookForm.bookCost.$invalid}">
+        <label for="bookCost" class="col-sm-2 control-label">Cost</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="bookCost" name="bookCost" min="0" max="9999.99" type="number" ng-model="ctrl.book.cost" ng-model-options="{updateOn: 'blur'}" ng-maxlength="7">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="bookInInventory" class="col-sm-2 control-label">In Inventory?</label>
+        <div class="col-sm-4">
+          <input type="checkbox" class="form-control" id="bookInInventory" ng-model="ctrl.book.inInventory">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="bookIsPdf" class="col-sm-2 control-label">Is PDF?</label>
+        <div class="col-sm-4">
+          <input type="checkbox" class="form-control" id="bookIsPdf" ng-model="ctrl.book.isPdf">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="bookIsPrint" class="col-sm-2 control-label">Is Print?</label>
+        <div class="col-sm-4">
+          <input type="checkbox" class="form-control" id="bookIsPrint" ng-model="ctrl.book.isPrint">
+        </div>
+      </div>
+      <div class="form-group" ng-class="{'has-error': ctrl.addBookForm.bookLocation.$dirty && ctrl.addBookForm.bookLocation.$invalid}">
+        <label for="bookLocation" class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="bookLocation" name="bookLocation" placeholder="Enter book location..." ng-model="ctrl.book.location" ng-model-options="{updateOn: 'blur'}" ng-maxlength="20">
+        </div>
+      </div>
+      <div class="form-group" ng-class="{'has-error': ctrl.addBookForm.bookType.$dirty && ctrl.addBookForm.bookType.$invalid}">
+        <label for="bookType" class="col-sm-2 control-label">Type:</label>
+        <div class="col-sm-4">
+          <input class="form-control" id="bookType" name="bookType" ng-model="ctrl.book.type" ng-model-options="{updateOn: 'blur'}" ng-maxlength="10">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-success" id="addBookButton" ng-click="ctrl.addBook()">Add</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <label class="col-sm-2 control-label" id="addBookStatus">{{ctrl.addBookStatus}}</label>
+        </div>
+      </div>
+    </form>
+</div>

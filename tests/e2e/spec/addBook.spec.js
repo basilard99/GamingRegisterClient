@@ -47,25 +47,48 @@ describe('The \'Add Book\' page will behave as follows - ', function addBookTest
 
             value = element(by.id('bookType')).getAttribute('value');
             expect(value).toBe('RPG');
+            
         });
     });
-/*
+
     describe('When the Add button is clicked -', function addButtonTests() {
 
-        it('will send the publisher to the service', function sendPublisherDataTest() {
+        it('will send the publisher to the service and receive a 500 if the data is not as expected', function sendBadBookData() {
 
-            element(by.id('publisherName')).sendKeys('Fantasy Flight Games');
-            element(by.id('publisherUrl')).sendKeys('http://www.ffg.com');
-            element(by.id('publisherCode')).sendKeys('FFG');
-            element(by.id('publisherDescription')).sendKeys('Owned by Asmodee');
+            var value = element(by.id('bookTitle')).sendKeys('Test Wrong Book');
+            expect(value).toBe('');
 
-            var button = element(by.id('addPublisherButton'));
+            value = element(by.id('bookCode')).sendKeys('TC01');
+            expect(value).toBe('');
+
+            value = element(by.id('bookDescription')).sendKeys('Test Description');
+            expect(value).toBe('');
+
+            value = element(by.id('bookCost')).sendKeys('12.95');
+            expect(value).toBe('0');
+
+            value = element(by.id('bookInInventory')).isSelected();
+            expect(value).toBe(true);
+
+            value = element(by.id('bookIsPdf')).isSelected();
+            expect(value).toBe(false);
+
+            value = element(by.id('bookIsPrint')).isSelected();
+            expect(value).toBe(true);
+
+            value = element(by.id('bookLocation')).sendKeys('Location 1');
+            expect(value).toBe('');
+
+            value = element(by.id('bookType')).sendKeys('RPG');
+            expect(value).toBe('RPG');
+            
+            var button = element(by.id('addBookButton'));
             button.click();
 
-            var status = element(by.id('addPublisherStatus')).getText();
-            expect(status).toBe('Publisher added successfully');
+            var status = element(by.id('addBookStatus')).getText();
+            expect(status).toBe('Failed to add book: 500');
 
         });
     });
-*/
+
 });

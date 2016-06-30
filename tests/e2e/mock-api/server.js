@@ -36,7 +36,7 @@ app.put('/api/publisherlist/ffg', function test(req, res) {
     res.send();
 });
 
-app.put('/api/books/', function testPutBook(req, res) {
+app.put('/api/books/Test%20Wrong%20Book', function testPutBook(req, res) {
     
     res.status(201);
     

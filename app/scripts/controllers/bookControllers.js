@@ -29,7 +29,7 @@ bookControllers.controller('addBookController', function defineController($http,
     };
 
     function _loadFailed(response) {
-        vm.addBookStatus = 'Failed to add book ' + response.status;
+        vm.addBookStatus = 'Failed to add book: ' + response.status;
     };
 
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('The main page will behave as follows -', function testSuite() {
+describe('Main Page', function testSuite() {
 
 	// Replace backslashes with forward slashes. On a Windows machine
 	// this will convert to a url style. If not, then it won't do
@@ -17,27 +17,41 @@ describe('The main page will behave as follows -', function testSuite() {
 		browser.driver.get(localPath + 'index.html#/');
 	});
 
-	describe('URL access will be as follows -', function redirectionTests() {
+	describe('When you try to get to the landing page - ', function testRouting() {
 
-		it('navigating to index.html will redirect to /main', function testRedirectToMain() {
+		it('going to \'index.html\' sends you to the main page', function testRedirectToMain() {
 			browser.driver.get(localPath + 'index.html#/');
 			browser.getLocationAbsUrl().then(function compareUrl(url) {
 				expect(url).toEqual('/main');
 			});
 		});
 
-		it('a garbage request will be redirected to /main', function testGarbageRequest() {
+		it('going to a page that doesn\'t exist sends you to the main page', function testGarbageRequest() {
 			browser.driver.get(localPath + 'index.html#/garbage');
 			browser.getLocationAbsUrl().then(function compareUrl(url) {
 				expect(url).toEqual('/main');
 			});
 		});
 
+		it('going to a page that does exist directly (deep-linking) sends you to that page', function testDeepLinking() {
+			browser.driver.get(localPath + 'index.html#/addPublisher');
+			browser.getLocationAbsUrl().then(function compareUrl(url) {
+				expect(url).toEqual('/addPublisher');
+			});
+		});
+
+		it('going to a VIEW directly sends you to the main page', function testDirectlyToView() {
+			browser.driver.get(localPath + 'app/views/addPublisher.html');
+			browser.getLocationAbsUrl().then(function compareUrl(url) {
+				expect(url).toEqual('/addPublisher');
+			});
+		});
+
 	});
 
-	describe('User actions are taken -', function userActions() {
+	describe('When the user chooses an action -', function testUserActions() {
 
-		it('when Show Publishers is clicked then the user is sent to /publishersList', function testShowClicked() {
+		it('\'Show Publishers\' should show a list of publishers', function testShowPublisherClicked() {
 			var button = element(by.id('listPublishersButton'));
 			button.click();
 			browser.getLocationAbsUrl().then(function compareUrl(url) {
@@ -45,7 +59,7 @@ describe('The main page will behave as follows -', function testSuite() {
 			});
 		});
 
-		it('when Add Publisher is clicked then the user is sent to /addPublisher', function testAddClicked() {
+		it('\'Add Publishers\' should show a form for the user to add a publisher', function testAddClicked() {
 			var button = element(by.id('addPublisherButton'));
 			button.click();
 			browser.getLocationAbsUrl().then(function compareUrl(url) {
@@ -54,4 +68,5 @@ describe('The main page will behave as follows -', function testSuite() {
 		});
 
 	});
+
 });

@@ -1,0 +1,9 @@
+I might not be doing this according to common Javascript practices; that seems
+to be a bit ephemeral. My goal with this is to ensure that the system works
+according to the way my mind works based on my previous experience.
+
+The main question asked, as with all testing, is "Does this work as I expect?"
+The second question asked, somewhat less often, is "What does this do?"
+
+The e2e tests have a different audience than unit tests, so are written in a
+language that an end user/BA/etc would understand.

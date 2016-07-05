@@ -8,7 +8,7 @@ mainControllers.controller('mainSelectionController', ['$location',
     var vm = this;
 
     vm.listPublishers = function listPublishers() {
-        $location.path('/publishersList');
+        $location.path('/publisherList');
     };
 
     vm.addPublisher = function addPublisher() {

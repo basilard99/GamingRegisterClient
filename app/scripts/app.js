@@ -8,7 +8,7 @@ biclient.config(['$routeProvider', function configureRoutes($routeProvider) {
         .when('/main', {
             templateUrl: 'app/views/main.html'
         })
-        .when('/publishersList', {
+        .when('/publisherList', {
             templateUrl: 'app/views/publisherList.html'
         })
         .when('/addPublisher', {

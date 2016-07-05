@@ -55,7 +55,7 @@ describe('Main Page', function testSuite() {
 			var button = element(by.id('listPublishersButton'));
 			button.click();
 			browser.getLocationAbsUrl().then(function compareUrl(url) {
-				expect(url).toEqual('/publishersList');
+				expect(url).toEqual('/publisherList');
 			});
 		});
 

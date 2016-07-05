@@ -1,7 +1,7 @@
 <div class="container" ng-controller="publisherListController as publisherList" ng-init="publisherList.loadPublisherList()">
     <h1>Publishers - {{publisherList[0].name}}</h1>
-    <ul ng-repeat="publisher in publisherList.publishers">
-        <li>{{publisher.name}}</li>
+    <ul>
+        <li class="list-group-item" ng-repeat="publisher in publisherList.publishers" id="{{publisher.uri}}">{{publisher.name}}</li>
     </ul>
-    <h1>{{publisherList.status}}</h1>
+    <div class="alert alert-info">{{publisherList.status}}</div>
 </div>

@@ -32,7 +32,7 @@ gulp.task('e2e', function e2eTask() {
 	require('./tests/e2e/mock-api/server.js');
 
     //gulp.src(['./tests/e2e/spec/**/*.js'])
-	gulp.src(['./tests/e2e/spec/main.spec.js'])
+	gulp.src(['./tests/e2e/spec/publisherList.spec.js'])
         .pipe(protractor({
             configFile: './tests/e2e/protractor.conf.js'
         }));

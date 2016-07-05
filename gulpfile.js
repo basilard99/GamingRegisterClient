@@ -47,11 +47,13 @@ gulp.task('unit', function unitTask(done) {
 });
 
 gulp.task('run', function runApp(cb) {
+	require('./tests/e2e/mock-api/server.js');
 	exec('.\\nw_support\\nw.exe .', function executeFunction(err, stdout, stderr) {
 		console.log(stdout);
 		console.log(stderr);
 		cb(err);
 	});
+	
 });
 
 gulp.task('build', ['unit', 'e2e', 'lint'], function runAll() {});

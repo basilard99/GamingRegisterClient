@@ -82,6 +82,16 @@ app.put('/api/books/Test%20Wrong%20Book', function testPutBook(req, res) {
     
 });
 
+app.get('/api/publisherList', function returnSamplePublisherList(req, res) {
+    var results = [];
+    results.push({ name: 'Fantasy Flight Games', uri: 'publisherList/FFG' });
+    results.push({ name: 'Pinnacle Entertainment Group', uri: 'publisherList/PEG' });
+    
+    var returnedList = { list: results };
+    res.status(200);
+    res.json(returnedList);
+});
+
 app.server = app.listen(8100, function listenOn() {
     console.log('Gulp is running the mock server on port: ' + 8100);
 });

@@ -37,7 +37,7 @@ describe('The main controllers will behave as follows -', function mainControlle
 
         it('the listPublishers operation is invoked then the location will be set to publishersList', function checkLocation() {
             mainController.listPublishers();
-            expect($location.path()).toBe('/publishersList');
+            expect($location.path()).toBe('/publisherList');
         });
 
         it('the addPublisher operation is invoked then the location will be set to addPublisher', function checkLocation() {

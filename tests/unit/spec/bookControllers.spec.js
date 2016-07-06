@@ -96,7 +96,7 @@ describe('The book controllers behave as follows -', function bookControllersTes
 
                 $httpBackend.flush();
 
-                expect(addBookController.addBookStatus).toBe('Failed to add book 500');
+                expect(addBookController.addBookStatus).toBe('Failed to add book: 500');
             });
         });
     });

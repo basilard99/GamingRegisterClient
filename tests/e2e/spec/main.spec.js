@@ -59,11 +59,19 @@ describe('Main Page', function testSuite() {
 			});
 		});
 
-		it('\'Add Publishers\' should show a form for the user to add a publisher', function testAddClicked() {
+		it('\'Add Publisher\' should show a form for the user to add a publisher', function testAddPublisherClicked() {
 			var button = element(by.id('addPublisherButton'));
 			button.click();
 			browser.getLocationAbsUrl().then(function compareUrl(url) {
 				expect(url).toEqual('/addPublisher');
+			});
+		});
+
+		it('\'Add Book\' should show a form for the user to add a book', function testAddBookClicked() {
+			var button = element(by.id('addBookButton'));
+			button.click();
+			browser.getLocationAbsUrl().then(function compareUrl(url) {
+				expect(url).toEqual('/addBook');
 			});
 		});
 

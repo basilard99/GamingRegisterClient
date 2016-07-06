@@ -1,6 +1,6 @@
 'use strict';
 
-describe('The \'Add Publisher\' page will behave as follows - ', function addPublisherTestSuite() {
+describe('Add Publisher page - ', function addPublisherTestSuite() {
 
     // Replace backslashes with forward slashes. On a Windows machine
     // this will convert to a url style. If not, then it won't do
@@ -17,9 +17,9 @@ describe('The \'Add Publisher\' page will behave as follows - ', function addPub
         browser.driver.get(localPath + '/index.html#/addPublisher');
     });
 
-    describe('When the Add button is clicked -', function addButtonTests() {
+    describe('When the user clicks \'Add Publisher\' -', function addButtonTests() {
 
-        it('will send the publisher to the service', function sendPublisherDataTest() {
+        it('will send the entered data to the service', function sendPublisherDataTest() {
 
             element(by.id('publisherName')).sendKeys('Fantasy Flight Games');
             element(by.id('publisherUrl')).sendKeys('http://www.ffg.com');

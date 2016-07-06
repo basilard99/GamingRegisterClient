@@ -31,8 +31,7 @@ gulp.task('lint', function lintTask() {
 gulp.task('e2e', function e2eTask() {
 	require('./tests/e2e/mock-api/server.js');
 
-    //gulp.src(['./tests/e2e/spec/**/*.js'])
-	gulp.src(['./tests/e2e/spec/addBook.spec.js'])
+    gulp.src(['./tests/e2e/spec/**/*.js'])
         .pipe(protractor({
             configFile: './tests/e2e/protractor.conf.js'
         }));

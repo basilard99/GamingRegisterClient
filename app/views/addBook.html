@@ -16,7 +16,7 @@
       <div class="form-group" ng-class="{'has-error': ctrl.addBookForm.bookDescription.$dirty && ctrl.addBookForm.bookDescription.$invalid}">
         <label for="bookDescription" class="col-sm-2 control-label">Description</label>
         <div class="col-sm-4">
-          <input class="form-control" id="bookDescription" name="bookDescription" placeholder="Enter book description..." ng-model="ctrl.publisher.description" ng-model-options="{updateOn: 'blur'}" ng-maxlength="500">
+          <input class="form-control" id="bookDescription" name="bookDescription" placeholder="Enter book description..." ng-model="ctrl.book.description" ng-model-options="{updateOn: 'blur'}" ng-maxlength="500">
         </div>
       </div>
       <div class="form-group" ng-class="{'has-error': ctrl.addBookForm.bookCost.$dirty && ctrl.addBookForm.bookCost.$invalid}">

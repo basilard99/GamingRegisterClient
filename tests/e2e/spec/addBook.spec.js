@@ -1,6 +1,6 @@
 'use strict';
 
-describe('The \'Add Book\' page will behave as follows - ', function addBookTestSuite() {
+describe('Add Book page - ', function addBookTestSuite() {
 
     // Replace backslashes with forward slashes. On a Windows machine
     // this will convert to a url style. If not, then it won't do
@@ -47,30 +47,80 @@ describe('The \'Add Book\' page will behave as follows - ', function addBookTest
 
             value = element(by.id('bookType')).getAttribute('value');
             expect(value).toBe('RPG');
-            
+
         });
     });
 
-    describe('When the Add button is clicked -', function addButtonTests() {
+    describe('When the user enters invalid data clicks the \'Add\' button -', function addButtonTests() {
 
-        it('will send the publisher to the service and receive a 500 if the data is not as expected', function sendBadBookData() {
+        it('will send the information to the service and receive a 400', function sendBadBookData() {
 
+            element(by.id('bookTitle')).clear();
             element(by.id('bookTitle')).sendKeys('Test Wrong Book');
-            element(by.id('bookCode')).sendKeys('TC01');
+
+            element(by.id('bookCode')).clear();
+            element(by.id('bookCode')).sendKeys('TC99'); // This is the bad data that the server will reject on.
+
+            element(by.id('bookDescription')).clear();
             element(by.id('bookDescription')).sendKeys('Test Description');
+
+            element(by.id('bookCost')).clear();
             element(by.id('bookCost')).sendKeys('12.95');
-            element(by.id('bookInInventory')).isSelected();
-            element(by.id('bookIsPdf')).isSelected();
-            element(by.id('bookIsPrint')).isSelected();
+
+            element(by.id('bookInInventory')).click();
+
+            element(by.id('bookIsPdf')).click();
+
+            element(by.id('bookIsPrint')).click();
+
+            element(by.id('bookLocation')).clear();
             element(by.id('bookLocation')).sendKeys('Location 1');
+
+            element(by.id('bookType')).clear();
             element(by.id('bookType')).sendKeys('RPG');
-            
+
             var button = element(by.id('addBookButton'));
             button.click();
 
-            //browser.pause();
             var status = element(by.id('addBookStatus')).getText();
-            expect(status).toBe('Failed to add book: 500');
+            expect(status).toBe('Failed to add book: 400');
+
+        });
+    });
+
+    describe('When the user enters valid data clicks the \'Add\' button -', function addButtonTests() {
+
+        it('will send the information to the service and receive a successful response', function sendBadBookData() {
+
+            element(by.id('bookTitle')).clear();
+            element(by.id('bookTitle')).sendKeys('Test Wrong Book');
+
+            element(by.id('bookCode')).clear();
+            element(by.id('bookCode')).sendKeys('TC01');
+
+            element(by.id('bookDescription')).clear();
+            element(by.id('bookDescription')).sendKeys('Test Description');
+
+            element(by.id('bookCost')).clear();
+            element(by.id('bookCost')).sendKeys('12.95');
+
+            element(by.id('bookInInventory')).click();
+
+            element(by.id('bookIsPdf')).click();
+
+            element(by.id('bookIsPrint')).click();
+
+            element(by.id('bookLocation')).clear();
+            element(by.id('bookLocation')).sendKeys('Location 1');
+
+            element(by.id('bookType')).clear();
+            element(by.id('bookType')).sendKeys('RPG');
+
+            var button = element(by.id('addBookButton'));
+            button.click();
+
+            var status = element(by.id('addBookStatus')).getText();
+            expect(status).toBe('Book added successfully');
 
         });
     });

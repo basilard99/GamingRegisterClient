@@ -37,56 +37,57 @@ app.put('/api/publisherlist/ffg', function test(req, res) {
 });
 
 app.put('/api/books/Test%20Wrong%20Book', function testPutBook(req, res) {
-    
+
     res.status(201);
-    
+
     var book = req.body;
-    
+
     if (book.title !== 'Test Wrong Book') {
-        res.status(500);
+        res.status(400);
     }
-    
+
     if (book.code !== 'TC01') {
-        res.status(500);
+        res.status(400);
     }
-    
+
     if (book.description !== 'Test Description') {
-        res.status(500);
+        console.log('BOOK DESCRIPTION: ' + book.description);
+        res.status(400);
     }
-    
+
     if (book.cost !== 12.95) {
-        res.status(500);
+        res.status(400);
     }
-    
-    if (book.inInventory !== true) {
-        res.status(500);
+
+    if (book.inInventory !== false) {
+        res.status(400);
     }
-    
+
     if (book.isPdf !== true) {
-        res.status(500);
+        res.status(400);
     }
-    
-    if (book.isPrint !== true) {
-        res.status(500);
+
+    if (book.isPrint !== false) {
+        res.status(400);
     }
-    
+
     if (book.location !== 'Location 1') {
-        res.status(500);
+        res.status(400);
     }
-    
+
     if (book.type !== 'RPG') {
-        res.status(500);
+        res.status(400);
     }
-    
+
     res.send();
-    
+
 });
 
 app.get('/api/publisherList', function returnSamplePublisherList(req, res) {
     var results = [];
     results.push({ name: 'Fantasy Flight Games', uri: 'publisherList/FFG' });
     results.push({ name: 'Pinnacle Entertainment Group', uri: 'publisherList/PEG' });
-    
+
     var returnedList = { list: results };
     res.status(200);
     res.json(returnedList);

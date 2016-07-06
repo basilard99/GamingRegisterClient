@@ -32,7 +32,7 @@ gulp.task('e2e', function e2eTask() {
 	require('./tests/e2e/mock-api/server.js');
 
     //gulp.src(['./tests/e2e/spec/**/*.js'])
-	gulp.src(['./tests/e2e/spec/addPublisher.spec.js'])
+	gulp.src(['./tests/e2e/spec/addBook.spec.js'])
         .pipe(protractor({
             configFile: './tests/e2e/protractor.conf.js'
         }));
@@ -53,7 +53,7 @@ gulp.task('run', function runApp(cb) {
 		console.log(stderr);
 		cb(err);
 	});
-	
+
 });
 
 gulp.task('build', ['unit', 'e2e', 'lint'], function runAll() {});

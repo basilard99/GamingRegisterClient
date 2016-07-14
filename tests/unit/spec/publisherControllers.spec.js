@@ -18,6 +18,7 @@ describe('The publisher controllers behave as follows -', function publisherCont
     var baseLocation = 'http://localhost:8100/api';
 
     beforeEach(angular.mock.module('utilityServices'));
+    beforeEach(angular.mock.module('publisherServices'));
     beforeEach(angular.mock.module('publisherControllers'));
 
     beforeEach(angular.mock.inject(function setUpMocks(_$controller_, _$httpBackend_, _$http_) {
@@ -66,7 +67,7 @@ describe('The publisher controllers behave as follows -', function publisherCont
                 publisherController.loadPublisherList();
                 $httpBackend.flush();
 
-                expect(publisherController.status).toBe('Unable to load publishers');
+                expect(publisherController.status).toBe('Unable to load publishers: 404');
             });
 
         });

@@ -7,6 +7,14 @@
           <input class="form-control" id="bookTitle" name="bookTitle" placeholder="Enter book title..." ng-model="ctrl.book.title" ng-model-options="{updateOn: 'blur'}" ng-required="true" ng-minlength="2" ng-maxlength="80">
         </div>
       </div>
+      <div class="form-group">
+        <label for="publisherList" class="col-sm-2 control-label">Publisher</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="publisherList" name="publisherList" ng-model="ctrl.book.publisher">
+                <option ng-repeat="option in ctrl.publisherList" value="{{option.uri}}">{{option.name}}</option>
+            </select>
+        </div>
+      </div>
       <div class="form-group" ng-class="{'has-error': ctrl.addBookForm.bookCode.$dirty && ctrl.addBookForm.bookCode.$invalid}">
         <label for="bookCode" class="col-sm-2 control-label">Code</label>
         <div class="col-sm-4">

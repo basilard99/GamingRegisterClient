@@ -2,7 +2,7 @@
 
 var publisherControllers = angular.module('publisherControllers', []);
 
-publisherControllers.controller('publisherListController', function publisherListController($http, locationService) {
+publisherControllers.controller('publisherListController', function publisherListController($http, locationService, publisherListService) {
 
     var vm = this;
 
@@ -11,18 +11,18 @@ publisherControllers.controller('publisherListController', function publisherLis
 
     vm.loadPublisherList = function loadPublishersFromApi() {
         vm.status = 'Loading...';
-        $http.get(locationService.getBaseLocation() + '/api/publisherList')
+        publisherListService.getPublisherList(locationService.getBaseLocation() + '/api/publisherList')
              .then(_loadSucceeded, _loadFailed);
     };
 
-    function _loadSucceeded(response) {
-        vm.publishers = response.data.list;
+    function _loadSucceeded(list) {
+        vm.publishers = list;
         vm.status = 'Success';
     };
 
-    function _loadFailed() {
+    function _loadFailed(err) {
         // TODO: Add logging?
-        vm.status = 'Unable to load publishers';
+        vm.status = 'Unable to load publishers: ' + err;
     };
 
 });

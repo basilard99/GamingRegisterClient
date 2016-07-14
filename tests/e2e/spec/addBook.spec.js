@@ -20,8 +20,10 @@ describe('Add Book page - ', function addBookTestSuite() {
     describe('When the page is first loaded - ', function pageFirstLoaded() {
 
         it('the fields will be set to the appropriate defaults', function checkDefaults() {
+            var value = element(by.id('publisherList')).getAttribute('value');
+            expect(element(by.id('publisherList')).all(by.tagName('option')).count()).toBe(2);
 
-            var value = element(by.id('bookTitle')).getAttribute('value');
+            value = element(by.id('bookTitle')).getAttribute('value');
             expect(value).toBe('');
 
             value = element(by.id('bookCode')).getAttribute('value');
@@ -90,10 +92,12 @@ describe('Add Book page - ', function addBookTestSuite() {
 
     describe('When the user enters valid data clicks the \'Add\' button -', function addButtonTests() {
 
-        it('will send the information to the service and receive a successful response', function sendBadBookData() {
-
+        it('will send the information to the service and receive a successful response', function sendGoodBookData() {
+            
             element(by.id('bookTitle')).clear();
             element(by.id('bookTitle')).sendKeys('Test Wrong Book');
+            
+            element(by.id('publisherList')).all(by.tagName('option')).last().click();
 
             element(by.id('bookCode')).clear();
             element(by.id('bookCode')).sendKeys('TC01');

@@ -45,6 +45,10 @@ app.put('/api/books/Test%20Wrong%20Book', function testPutBook(req, res) {
     if (book.title !== 'Test Wrong Book') {
         res.status(400);
     }
+    
+    if (book.publisher !== 'publisherList/PEG') {
+        res.status(500);
+    }
 
     if (book.code !== 'TC01') {
         res.status(400);

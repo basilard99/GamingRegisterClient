@@ -2,7 +2,8 @@
 
 var publisherControllers = angular.module('publisherControllers', []);
 
-publisherControllers.controller('publisherListController', function publisherListController($http, locationService, publisherListService) {
+publisherControllers.controller('publisherListController',
+                                function publisherListController($http, locationService, publisherListService) {
 
     var vm = this;
 

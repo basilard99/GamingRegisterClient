@@ -93,10 +93,10 @@ describe('Add Book page - ', function addBookTestSuite() {
     describe('When the user enters valid data clicks the \'Add\' button -', function addButtonTests() {
 
         it('will send the information to the service and receive a successful response', function sendGoodBookData() {
-            
+
             element(by.id('bookTitle')).clear();
             element(by.id('bookTitle')).sendKeys('Test Wrong Book');
-            
+
             element(by.id('publisherList')).all(by.tagName('option')).last().click();
 
             element(by.id('bookCode')).clear();

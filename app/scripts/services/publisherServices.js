@@ -13,7 +13,7 @@ myModule.factory('publisherListService', function publisherListService($http, $q
                 }
             }, function getFailed(response) {
                 return $q.reject(response.status);
-            });        
-        }   
-    }
+            });
+        }
+    };
 });
